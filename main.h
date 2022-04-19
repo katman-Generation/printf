@@ -37,7 +37,8 @@ void print_number(int n);
 int print_unsigned(va_list l, counter *p);
 int count_digit(int i);
 
-
+int (*get_print(char s))(va_list, counter *);
 int _printf(const char *format, ...);
+int get_flag(char s, counter *p);
 
 #endif

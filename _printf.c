@@ -11,44 +11,38 @@
 
 int _printf(const char *format, ...)
 {
-	int i = 0, j = 0;
-	char *tate = NULL;
-
+	int (*pfunc)(va_list, counter *);
+	const char *tate;
 	va_list neo;
+	counter cont = {0, 0, 0};
+
+	register int count = 0;
 
 	va_start(neo, format);
-
-	while (format[i] != '\0')
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (tate = format; *tate; tate++)
 	{
-		if (format[i] != '%')
-			write(1, format[i], 1);
-		else
+		if (*tate == '%')
 		{
-			if (formart[i+1] == 'c')
+			tate++;
+			if (*tate == '%')
 			{
-				write(1, va_arg(neo, int));
-				i++;
+				count += _putchar('%');
+				continue;
 			}
-			else if (format[i+1] == 's')
-			{
-				i++;
-				tate = va_arg(neo, char *);
-				j = 0;
-				while (tate[j] != '\0')
-				{
-					write(1, tate[j] != '\0', 1);
-					j++;
-				}
-			}
-			else if (format[i+1] == '%')
-			{
-				i++;
-				write(1, '%', 1);
-			}
+			while (get_flag(*tate, &cont))
+				tate++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(neo, &cont)
+				: _printf("%%%c", *tate);
 		}
-		i++;
+		else
+			count += _putchar(*tate);
 	}
+	_putchar(-1);
 	va_end(neo);
-
-	return (0);
-}
+	return (count);
