@@ -37,8 +37,41 @@ void print_number(int n);
 int print_unsigned(va_list l, counter *p);
 int count_digit(int i);
 
+/* print_bases */
+int print_hex(va_list l, counter *p);
+int print_hex_big(va_list l, counter *p);
+int print_binary(va_list l, counter *p);
+int print_octal(va_list l, counter *p);
+
+/* converter */
+char *convert(unsigned long int num, int base, int lowercase);
+
+/* get_print */
 int (*get_print(char s))(va_list, counter *);
+
+/* _printf */
 int _printf(const char *format, ...);
+
+/* get_flag */
 int get_flag(char s, counter *p);
+
+/* print_alpha */
+int print_string(va_list l, counter *p);
+int print_char(va_list l, counter *p);
+
+/* write_funcs */
+int _putchar(char c);
+int _puts(char *str);
+
+/* print_custom */
+int print_rot13(va_list l, counter *p);
+int print_rev(va_list l, counter *p);
+int print_bigS(va_list l, counter *p);
+
+/* print_address */
+int print_address(va_list l, counter *p);
+
+/* print_percent */
+int print_percent(va_list l, counter *p);
 
 #endif
